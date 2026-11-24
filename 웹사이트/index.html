@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>로또 번호 생성기</title>
+  <script>
+    // 화면이 그려지기 전에 테마를 정해, 다크 모드에서 흰 화면이 번쩍이지 않게 한다.
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('lottoTheme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <button id="themeToggle" class="theme-switch" type="button" role="switch" aria-checked="false">
+        <span>다크 모드</span>
+        <span class="switch-track" aria-hidden="true">
+          <span class="switch-knob">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4.5"/>
+              <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/>
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
+
+    <header class="masthead">
+      <h1>로또 번호 생성기</h1>
+      <p class="lead">1부터 45까지, 겹치지 않는 번호 6개를 한 번에 5세트 뽑습니다. 마음에 드는 세트는 체크해서 한꺼번에 저장하세요.</p>
+      <button id="drawButton" class="draw-button" type="button">번호 5세트 뽑기</button>
+    </header>
+
+    <div class="columns">
+      <section class="slip" aria-labelledby="slipTitle">
+        <h2 id="slipTitle">이번에 뽑은 번호</h2>
+        <ol id="drawList" class="draw-list"></ol>
+        <div id="drawActions" class="draw-actions" hidden>
+          <label class="select-all">
+            <input id="selectAll" type="checkbox">
+            <span>모두 선택</span>
+          </label>
+          <button id="saveSelectedButton" class="save-selected" type="button" disabled>선택한 번호 저장</button>
+        </div>
+        <p id="drawHint" class="hint">위의 버튼을 누르면 A부터 E까지 번호가 채워집니다.</p>
+      </section>
+
+      <section class="saved" aria-labelledby="savedTitle">
+        <div class="saved-head">
+          <h2 id="savedTitle">내 로또 번호 <span id="savedCount" class="saved-count"></span></h2>
+        </div>
+        <div id="savedActions" class="saved-actions" hidden>
+          <label class="select-all">
+            <input id="selectAllSaved" type="checkbox">
+            <span>모두 선택</span>
+          </label>
+          <button id="deleteSelectedButton" class="delete-selected" type="button" disabled>선택한 번호 삭제</button>
+        </div>
+        <ul id="savedList" class="saved-list"></ul>
+        <p id="savedEmpty" class="hint">아직 저장한 번호가 없습니다. 마음에 드는 세트를 체크하고 선택한 번호 저장을 누르면 여기에 모입니다.</p>
+        <p id="storageNotice" class="notice" hidden>이 브라우저에서는 저장소를 쓸 수 없어, 창을 닫으면 저장한 번호가 사라집니다.</p>
+      </section>
+    </div>
+
+    <footer class="footnote">
+      <p>저장한 번호는 이 브라우저에만 보관됩니다. 번호는 무작위로 뽑으며 당첨 확률과는 관계가 없습니다.</p>
+    </footer>
+
+    <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
