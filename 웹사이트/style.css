@@ -1,12 +1,12 @@
 /* 로또 번호 생성기
-   색: 책상(desk) 위에 놓인 흰 용지(paper), 용지 인쇄색(slip-red), 그리고 번호대별 공 색 5가지 */
+   색: 노란색 책상(desk) 위에 놓인 흰 용지(paper), 용지 인쇄색(slip-red), 그리고 번호대별 공 색 5가지 */
 
 :root {
-  --desk: #e7ecf1;
+  --desk: #fdf1bf;
   --paper: #ffffff;
   --ink: #17202e;
   --ink-soft: #4f5a6b;
-  --line: #cbd3dd;
+  --line: #e4d48f;
   --slip-red: #d8432f;
   --slip-red-soft: #f3cdc6;
   --focus: #1f5fd1;
@@ -33,7 +33,7 @@
 
 /* 다크 모드: 밤의 책상 위 용지. 공 색은 그대로 두고 바탕과 글자만 바꾼다 */
 :root[data-theme="dark"] {
-  --desk: #151b24;
+  --desk: #1f1a0c;
   --paper: #1f2733;
   --ink: #e8edf3;
   --ink-soft: #a3aebd;
